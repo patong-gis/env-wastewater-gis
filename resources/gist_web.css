@@ -1,0 +1,675 @@
+/* GIST: Web Dashboard Stylesheet - สไตล์ชีตสำหรับแดชบอร์ดบนเว็บ */
+/* Version: 1.0 | Updated: JAN 2026 */
+/* Developed by GIST - ศูนย์ฝึกอบรมและบริการด้านเทคโนโลยีภูมิสารสนเทศ ม.อ.ภูเก็ต */
+
+/* Reset and base styles - รีเซ็ตและสไตล์พื้นฐาน */
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles - สไตล์ของบอดี้ */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Header styles - สไตล์ของส่วนหัว */
+.header { 
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1e88e5 100%);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+}
+
+/* Header title styles - สไตล์ของหัวเรื่องในส่วนหัว */
+.header h1 { 
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+/* Header subtitle styles - สไตล์ของคำบรรยายใต้หัวเรื่อง */
+.header p { 
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Main container styles - สไตล์ของคอนเทนเนอร์หลัก */
+.container { 
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Summary cards grid styles - สไตล์กริดของการ์ดสรุป */
+.summary-cards { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Individual card styles - สไตล์ของการ์ดแต่ละใบ */
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-left: 4px solid #1e88e5;
+}
+
+/* Specific card colors - สีเฉพาะของการ์ด GT*/
+.card.gt {
+    border-left-color: #00a86b;
+}
+
+/* Specific card colors - สีเฉพาะของการ์ด TRT */
+.card.trt {
+    border-left-color: #ff6f00;
+}
+
+/* Card label styles - สไตล์ของป้ายสำหรับการ์ด */
+.card-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Card value styles - สไตล์ของค่าบนการ์ด */
+.card-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Card subtext styles - สไตล์ของข้อความย่อยบนการ์ด */
+.card-subtext {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+}
+
+/* Dashboard grid styles - สไตล์ในรูปแบบกริดของแดชบอร์ด */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Full width panel styles - สไตล์ในรูปแบบกริดของแดชบอร์ด (เต็มพื้นที่) */
+.dashboard-grid.full {
+    grid-template-columns: 1fr;
+}
+
+/* Panel styles - สไตล์ของแผงข้อมูล */
+.panel {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Panel title styles - สไตล์ของหัวเรื่องในแผงข้อมูล */
+.panel-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #1e88e5;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Panel title icon styles - สไตล์ของไอคอนในหัวเรื่องแผงข้อมูล */
+.panel-title i {
+    color: #1e88e5;
+    font-size: 20px;
+}
+
+/* Map legend panel styles - สไตล์ของแผงคำอธิบายสำหรับแผนที่ */
+.map-legend-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Legend item styles - สไตล์ของรายการคำอธิบาย - legend */
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+/* Legend color circle styles - สไตล์ของวงกลมสีในคำอธิบาย - legend */
+.legend-color {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+}
+
+/* Map container styles - สไตล์ของพื้นที่สำหนับวาดแผนที่บนเว็บ */
+#map {
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Filter container styles - สไตล์สำรับพื้นที่จัดเก็บตัวกรอง */
+.filter-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+/* Individual filter group styles - สไตล์ของกลุ่มตัวกรองแต่ละกลุ่ม */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1 1 auto;
+    min-width: 140px;
+}
+
+/* Filter label styles - สไตล์ของป้ายตัวกรอง */
+.filter-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* Filter select styles - สไตล์ของตัวกรองรูปแบบตัวเลือก - select */
+.filter-group select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 100%;
+    height: 100px;
+}
+
+/* Filter button group styles - สไตล์ของกลุ่มของปุ่มกดสำหรับตัวกรอง */
+.filter-button-group {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+/* Button styles - สไตล์ของปุ่มกด */
+button.btn.select-all {
+    padding: 6px 12px;
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+/* Button hover styles - สไตล์ของปุ่มกดเมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+button.btn.select-all:hover {
+    background-color: #0a3d91;
+}
+
+/* General button styles - สไตล์ของปุ่มกดทั่วไป */
+button.btn {
+    padding: 8px 16px;
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    align-self: flex-end;
+}
+
+/* General button hover styles - สไตล์ของปุ่มกดทั่วไปเมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+button.btn:hover {
+    background-color: #1565c0;
+}
+
+/* Secondary button styles - สไตล์ของปุ่มกด - ลำดับรอง */
+button.btn.secondary {
+    background-color: #e2e8f0;
+    color: #333;
+}
+
+/* Secondary button hover styles - สไตล์ของปุ่มกด - ลำดับรอง เมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+button.btn.secondary:hover {
+    background-color: #cbd5e0;
+}
+
+/* Chart container styles - สไตล์ของพื้นที่สำหรับแสดงกราฟ */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+/* Table search styles - สไตล์ของช่องค้นหาในตาราง */
+.table-search {
+    margin-bottom: 15px;
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Table search input styles - สไตล์ของช่องป้อนข้อมูลสำหรับค้นหาในตาราง */
+.table-search input {
+    width: 55%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Table styles - สไตล์ของตารางข้อมูล */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Table header styles - สไตล์ของหัวตาราง - table header */
+table th {
+    background-color: #f7fafc;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e2e8f0;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+/* Table header hover styles - สไตล์ของหัวตาราง - table header เมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+table th:hover {
+    background-color: #e3f2fd;
+}
+
+/* Sort indicator styles - สไตล์ของตัวบ่งชี้การจัดเรียงข้อมูล */
+table th.sortable::after {
+    content: ' ⇅';
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+/* Sort ascending styles - สไตล์ของการจัดเรียงข้อมูลจากน้อยไปมาก */
+table th.sort-asc::after {
+    content: ' ↑';
+    opacity: 1;
+}
+
+/* Sort descending styles - สไตล์ของการจัดเรียงข้อมูลจากมากไปน้อย */
+table th.sort-desc::after {
+    content: ' ↓';
+    opacity: 1;
+}
+
+/* Table cell styles - สไตล์ของเซลล์ในตาราง - table cell */
+table td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+/* Table row hover styles - สไตล์ของแถวในตารางเมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+table tbody tr:hover {
+    background-color: #f7fafc;
+}
+
+/* Badge styles - สไตล์ของป้ายแสดงสถานะ */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 450;
+}
+
+/* Specific badge styles - สไตล์ของป้ายแสดงสถานะเฉพาะ - yes - มี - ติดตั้งแล้ว - ถูกต้อง - เหมาะสม */
+.badge.yes {
+    background-color: #c8e6c9;
+    /*color: #1b5e20;*/
+    color: #333;
+}
+
+/* Specific badge styles - สไตล์ของป้ายแสดงสถานะเฉพาะ - no - ไม่มี - ไม่ถูกต้อง - ไม่เหมาะสม */
+.badge.no {
+    background-color: #ffccbc;
+    /*color: #bf360c;*/
+    color: #333;
+}
+
+/* Specific badge styles - สไตล์ของป้ายแสดงสถานะเฉพาะ - unknown - ไม่ทราบสถานะ */
+.badge.unknown {
+    background-color: #fff9c4;
+    /*color: #f57f17;*/
+    color: #333;
+}
+
+/* Specific badge styles - สไตล์ของป้ายแสดงสถานะเฉพาะ - category - หมวดหมู่ */
+.badge.category {
+    background-color: #b3e5fc;
+    color: #01579b;
+}
+
+/* Leaflet popup content styles - สไตล์ของเนื้อหาป๊อปอัพในแผนที่ Leaflet - popup contents*/
+.leaflet-popup-content {
+    font-size: 12px;
+    max-width: 250px;
+}
+
+/* Popup title styles - สไตล์ของหัวเรื่องในป๊อปอัพ */
+.popup-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Popup row styles - สไตล์ของแถวในป๊อปอัพ */
+.popup-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+/* Popup label styles - สไตล์ของป้ายในป๊อปอัพ */
+.popup-label {
+    font-weight: 600;
+    color: #666;
+}
+
+/* Tooltip styles - สไตล์ของคำแนะนำแบบ tooltip */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+ /* Tooltip text styles - สไตล์ของข้อความในคำแนะนำแบบ tooltip */
+.tooltip-text {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px 12px;
+    position: absolute;
+    z-index: 1000;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-weight: normal;
+}
+
+/* Tooltip arrow styles - สไตล์ของลูกศรในคำแนะนำแบบ tooltip */
+.tooltip-text::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/*  Show tooltip on hover - แสดงคำแนะนำแบบ tooltip เมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+}
+
+/* Introduction section styles - สไตล์ของส่วนแนะนำ */
+.intro-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Introduction section heading styles - สไตล์ของหัวเรื่องในส่วนแนะนำ */
+.intro-section h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Introduction section paragraph styles - สไตล์ของย่อหน้าในส่วนแนะนำ */
+.intro-section p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Footer styles - สไตล์ของส่วนท้ายของหน้า - footer */
+.footer {
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1e88e5 100%);
+    color: white;
+    padding: 40px 20px;
+    margin-top: 50px;
+    box-shadow: 0 -4px 12px rgba(13, 71, 161, 0.3);
+}
+
+/* Footer content styles - สไตล์ของเนื้อหาในส่วนท้ายของหน้า - footer */
+.footer-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Footer section styles - สไตล์ของแต่ละส่วนในส่วนท้ายของหน้า - footer */
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    padding-bottom: 10px;
+}
+
+/* Footer paragraph styles - สไตล์ของย่อหน้าในส่วนท้ายของหน้า - footer */
+.footer-section p {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+/* Footer list styles - สไตล์ของรายการในส่วนท้ายของหน้า - footer */
+.footer-section ul {
+    list-style: none;
+    font-size: 13px;
+}
+
+/* Footer list item styles - สไตล์ของรายการในส่วนท้ายของหน้า - footer */
+.footer-section ul li {
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+/* Footer link styles - สไตล์ของลิงก์ในส่วนท้ายของหน้า - footer */
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+/* Footer link hover styles - สไตล์ของลิงก์ในส่วนท้ายของหน้า - footer เมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+.footer-section a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+/* Footer bottom styles - สไตล์ของส่วนล่างสุดในส่วนท้ายของหน้า - footer */
+.footer-bottom {
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* Go to Top Button styles - สไตล์ของปุ่มกดเพื่อกลับไปด้านบนของหน้า */
+#goToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background-color: #1e88e5;
+    color: white;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.4);
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+/* Go to Top Button hover styles - สไตล์ของปุ่มกดเพื่อกลับไปด้านบนของหน้า เมื่อเอาเมาส์ไปวางบน/ชี้ - hover */
+#goToTopBtn:hover {
+    background-color: #0d47a1;
+    box-shadow: 0 6px 16px rgba(30, 136, 229, 0.6);
+    transform: translateY(-2px);
+}
+
+/* Show Go to Top Button - แสดงปุ่มกดเพื่อกลับไปด้านบนของหน้า */
+#goToTopBtn.show {
+    display: flex;
+}
+
+/* Responsive styles - สไตล์สำหรับการแสดงผลบนอุปกรณ์ต่างๆ */
+@media (max-width: 768px) {
+    #goToTopBtn {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-container {
+        gap: 10px;
+    }
+
+    .filter-group {
+        flex: 1 1 calc(50% - 5px);
+        min-width: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filter-group {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    .filter-group select {
+        width: 100%;
+        height: 80px;
+    }
+
+    button.btn.select-all {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    button.btn.secondary {
+        width: 100%;
+    }
+
+    #map {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-container {
+        gap: 12px;
+    }
+
+    .filter-group {
+        min-width: 100%;
+    }
+
+    .filter-group select {
+        height: 70px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .filter-group label {
+        font-size: 11px;
+    }
+
+    button.btn.select-all {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+
+    button.btn.secondary {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+/* End of GIST: Web Dashboard Stylesheet */

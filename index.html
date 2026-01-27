@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <title>GIS Dashboard - การติดตั้งถังดักไขมันและระบบบำบัดน้ำเสียในพื้นที่เทศบาลเมืองป่าตอง</title>
+
+        <!-- Stylesheets & Vendor Libraries (CSS) -->
+        <link rel="stylesheet" href="vendors/leaflet.js/leaflet.css">
+        <link rel="stylesheet" href="vendors/fontawesome/6.7.2/css/all.min.css">
+        <link rel="stylesheet" href="vendors/datatables/datatables.min.css">
+        <link rel="stylesheet" href="resources/gist_web.css">
+        
+    </head>
+    <body>
+        <!-- Go to Top Button -->
+        <button id="goToTopBtn" title="กลับไปด้านบน"><i class="fas fa-arrow-up"></i></button>
+
+        <div class="header">
+            <p>GIS Dashboard</p>
+            <h3>การติดตั้งถังดักไขมันและระบบบำบัดน้ำเสียในพื้นที่เทศบาลเมืองป่าตอง</h3>
+            <p>กองช่างสุขาภิบาล เทศบาลเมืองป่าตอง</p>
+        </div>
+
+        <div class="container">
+            <!-- Introduction Section -->
+            <div class="intro-section">
+                <h2>แนะนำ</h2>
+                <p>
+                    GIS Dashboard เครื่องมือสำคัญที่ใช้ในการ รวบรวมและแสดงภาพข้อมูลที่ถูกต้องและครบถ้วน เกี่ยวกับการติดตั้งและการใช้งาน ถังดักไขมัน (Grease Trap: GT) และ ระบบบำบัดน้ำเสีย (Wastewater Treatment System: TRT) ทั้งหมดในพื้นที่ เทศบาลเมืองป่าตอง ข้อมูลเหล่านี้ได้รับการจัดเก็บโดยคำนึงถึง ประเภทและขนาดของอาคารตามที่กฎหมายกำหนด เพื่อประโยชน์ในการตรวจสอบและบริหารจัดการ ผู้ใช้งานสามารถใช้ฟังก์ชัน ค้นหา, ตัวกรอง (Filter) และการสลับคุณสมบัติข้อมูล เพื่อสำรวจข้อมูลในระดับอาคาร และคลิกที่แถวของตารางข้อมูลหรือเครื่องหมาย (Marker) บนแผนที่เพื่อดูรายละเอียดเชิงลึกของแต่ละสถานที่
+                </p>
+            </div>
+
+            <!-- Summary Cards / ข้อมูลสรุปเชิงสถิติ -->
+            <div class="summary-cards">
+                <div class="card">
+                    <div class="card-label">ข้อมูลการสำรวจทั้งหมด (จุด, อาคาร)</div>
+                    <div class="card-value" id="totalBuildings">0</div>
+                    <div class="card-subtext">ชุมชนบ้านกะหลิม</div>
+                </div>
+                <div class="card gt">
+                    <div class="card-label">จำนวนอาคารที่ติดตั้งถังดักไขมันแล้ว</div>
+                    <div class="card-value" id="gtInstCount">0</div>
+                    <div class="card-subtext" id="gtInstPercent">0%</div>
+                </div>
+                <div class="card trt">
+                    <div class="card-label">จำนวนอาคารที่ติดตั้งระบบบำบัดน้ำเสียแล้ว</div>
+                    <div class="card-value" id="trtInstCount">0</div>
+                    <div class="card-subtext" id="trtInstPercent">0%</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <div class="panel-title"><i class="fas fa-road"></i>แผนภูมิ (Chart): จำนวนอาคาร (จำแนกตามชื่อถนน)</div>
+                    <div class="chart-container">
+                        <canvas id="roadChart"></canvas>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-title"><i class="fas fa-map-location-dot"></i>แผนภูมิ (Chart): จำนวนอาคาร (จำแนกตามชื่อซอย)</div>
+                    <div class="chart-container">
+                        <canvas id="soiChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid full">
+                <div class="panel">
+                    <div class="panel-title"><i class="fas fa-building"></i>แผนภูมิ (Chart): จำนวนอาคาร (จำแนกตามประเภทของอาคาร)</div>
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="typeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map and Filters -->
+            <div class="panel">
+                <div class="panel-title"><i class="fas fa-map"></i>แผนที่แบบโต้ตอบ (Interactive Map)</div>
+                <!-- <span>ใช้ตัวกรอง (Filter) เพื่อจำกัดขอบเขตข้อมูลที่แสดงบนแผนที่</span> -->
+                <div class="filter-container">
+                    <div class="filter-group">
+                        <label for="filterRoad">ชื่อถนน:</label>
+                        <select id="filterRoad" multiple>
+                        </select>
+                        <button class="btn select-all" type="button" data-target="filterRoad">เลือกทั้งหมด</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterSoi">ชื่อซอย:</label>
+                        <select id="filterSoi" multiple>
+                        </select>
+                        <button class="btn select-all" type="button" data-target="filterSoi">เลือกทั้งหมด</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterType">ประเภทของอาคาร:</label>
+                        <select id="filterType" multiple>
+                        </select>
+                        <button class="btn select-all" type="button" data-target="filterType">เลือกทั้งหมด</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterGT">การติดตั้งถังดักไขมัน (gt_inst):</label>
+                        <select id="filterGT" multiple>
+                        </select>
+                        <button class="btn select-all" type="button" data-target="filterGT">เลือกทั้งหมด</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterTRT">การติดตั้งระบบบำบัดน้ำเสีย (trt_inst):</label>
+                        <select id="filterTRT" multiple>
+                        </select>
+                        <button class="btn select-all" type="button" data-target="filterTRT">เลือกทั้งหมด</button>
+                    </div>
+                    <button class="btn secondary" id="resetFilters"><i class="fas fa-redo"></i> คืนค่าตัวกรอง (Filter)</button>
+                </div>
+
+                <div id="map"></div>
+
+                <!-- Building Status Legend -->
+                <div class="map-legend-panel">
+                    <div style="grid-column: 1 / -1; font-weight: 600; color: #333; margin-bottom: 5px;">
+                        <i class="fas fa-info-circle"></i> สัษญลักษณ์บนแผนที่ (Map Legend)
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #48bb78;"></span>
+                        <span>มีการติดตั้งถังดักไขมัน</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #ef5350;"></span>
+                        <span>ไม่มีการติดตั้งถังดักไขมัน</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #9e9e9e;"></span>
+                        <span>ไม่ทราบสถานะ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="panel" style="margin-top: 30px;">
+                <div class="panel-title"><i class="fas fa-table"></i>ตาราง (Data Table): รายละเอียดข้อมูลอาคาร</div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <div class="table-search">
+                        <input type="text" id="tableSearch" placeholder="ค้นหาข้อมูล โดยระบุชื่ออาคาร หรือ บ้านเลขที่">
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <label for="rowsPerPage" style="font-size: 13px; font-weight: 600;">จำนวนแถว:</label>
+                        <select id="rowsPerPage" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px;">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table id="buildingTable">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="bld_hno">บ้านเลขที่</th>
+                                <th>ชื่ออาคาร</th>
+                                <th class="sortable" data-sort="bld_road">ถนน</th>
+                                <th class="sortable" data-sort="bld_soi">ซอย</th>
+                                <th class="sortable" data-sort="bld_type">ประเภทของอาคาร</th>
+                                <th class="sortable" data-sort="gt_inst">การติดตั้งถังดักไขมัน (GT)</th>
+                                <th class="sortable" data-sort="trt_inst">การติดตั้งระบบบำบัดน้ำเสีย (TRT)</th>
+                                <th class="sortable" data-sort="rec_date">วันที่สำรวจ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px;">
+                    <div style="font-size: 13px; color: #666;">
+                        ข้อมูลลำดับที่ <span id="rowStart">0</span>-<span id="rowEnd">0</span> จาก <span id="totalRows">0</span> อาคาร
+                    </div>
+                    <div style="display: flex; gap: 5px; align-items: center;">
+                        <button class="btn secondary" id="prevPage"><i class="fas fa-chevron-left"></i></button>
+                        <div style="font-size: 13px; min-width: 100px; text-align: center;">
+                            หน้า <span id="currentPage">1</span> จาก <span id="totalPages">1</span>
+                        </div>
+                        <button class="btn secondary" id="nextPage"><i class="fas fa-chevron-right"></i></button>
+                        <input type="number" id="pageJumpInput" min="1" placeholder="ระบุเลขเหน้า" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; width: 80px;">
+                        <button class="btn" id="pageJumpBtn" style="padding: 8px 12px;">ไปยังหน้า</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <div class="footer-content">
+                <!-- Organization Info -->
+                <div class="footer-section">
+                    <h3>หน่วยงาน</h3>
+                    <p><strong>กองช่างสุขาภิบาล</strong></p>
+                    <p>เทศบาลเมืองป่าตอง สำนักงานเทศบาลเมืองป่าตอง </p>
+                    <p style="margin-top: 15px;">
+                        <strong>ที่อยู่:</strong>
+                        เลขที่ 12/3 ถนนราชปาทานุสรณ์ ตำบลป่าตอง อำเภอกะทู้ จังหวัดภูเก็ต 83150
+                    </p>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="footer-section">
+                    <h3>การติดต่อ</h3>
+                    <p>
+                        <strong>โทรศัพท์:</strong> (66) 076-345371<br>
+                        <strong>Email:</strong> <a href="mailto:patong.sanitary@gmail.com">patong.sanitary@gmail.com</a>
+                        <br/><strong>ผู้ประสานงานโครงการ:</strong> นางวิริยา เทวนุกูล วิศวกรสุขาภิบาลชำนาญการ (66) 086-9481981<br>
+                    </p>
+                </div>
+
+                <!-- Documentation & Support -->
+                <div class="footer-section">
+                    <h3>เอกสารและแหล่งข้อมูล</h3>
+                    <ul>
+                        <li><a href="#" title="View user guide and tutorials">📖 คู่มือการใช้งานและการสนับสนุน</a></li>
+                        <li><a href="#" title="Data privacy and terms of service">⚖️ นโยบายความเป็นส่วนตัวและเงื่อนไขการใช้บริการ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Technical Attributions -->
+                <div class="footer-section">
+                    <h3>เฟรมเวิร์กและเทคโนโลยีที่ใช้</h3>
+                    <ul>
+                        <li><strong>การทำแผนที่:</strong> <a href="https://leafletjs.com/" target="_blank">Leaflet.js</a></li>
+                        <li><strong>การสร้างกราฟ::</strong> <a href="https://www.chartjs.org/" target="_blank">Chart.js</a></li>
+                        <li><strong>แผนที่ฐาน:</strong> <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a></li>
+                        <li><strong>ไอคอน:</strong> <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></li>
+                        <li><strong>การพัฒนา:</strong> HTML5, CSS3, JavaScript ES6+</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 เทศบาลเมืองป่าตอง – กองช่างสุขาภิบาล สงวนลิขสิทธิ์</p>
+                <p>ปรับปรุงล่าสุด: มกราคม 2026 | Version 1.0 | แดชบอร์ดการติดตั้งถังดักไขมันและระบบบำบัดน้ำเสียในพื้นที่เทศบาลเมืองป่าตอง</p>
+            </div>
+        </div>
+
+        <!-- Scripts & Vendor Libraries -->
+        <script src="vendors/leaflet.js/leaflet.js"></script>
+        <script src="vendors/chart.js/3.9.1/chart.min.js"></script>
+        <script src="layers/ds_building_envsurvey_2.js"></script>
+        <script src="resources/dashboard.js"></script>
+        <script src="resources/gist_web.js"></script>
+    </body>
+</html>
