@@ -18,4 +18,22 @@ goToTopBtn.addEventListener('click', function() {
     });
 });
 
+// Toggle More/Less Content functionality - ฟังก์ชันสลับการแสดงเนื้อหาเพิ่มเติม/น้อยลง
+function toggleContent(pp) {
+    const p2 = document.getElementById(pp);
+    const icon = document.getElementById("toggleIcon");
+
+    if (p2.style.display === "none") {
+        p2.style.display = "block";
+        // Change to 'Up' icon
+        icon.classList.remove("fa-circle-chevron-down");
+        icon.classList.add("fa-circle-chevron-up");
+    } else {
+        p2.style.display = "none";
+        // Change back to 'Down' icon
+        icon.classList.remove("fa-circle-chevron-up");
+        icon.classList.add("fa-circle-chevron-down");
+    }
+}
+
 // Additional JavaScript functionalities can be added here - สามารถเพิ่มฟังก์ชัน JavaScript เพิ่มเติมที่นี่

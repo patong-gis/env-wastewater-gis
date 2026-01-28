@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <title>GIS Dashboard - การติดตั้งถังดักไขมันและระบบบำบัดน้ำเสียในพื้นที่เทศบาลเมืองป่าตอง</title>
-
+        <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
         <!-- Stylesheets & Vendor Libraries (CSS) -->
         <link rel="stylesheet" href="vendors/leaflet.js/leaflet.css">
         <link rel="stylesheet" href="vendors/fontawesome/6.7.2/css/all.min.css">
@@ -26,10 +26,15 @@
         <div class="container">
             <!-- Introduction Section -->
             <div class="intro-section">
-                <h2>แนะนำ</h2>
+                <h2>เกี่ยวกับโครงการ</h2>
+                <p>โครงการจัดทำระบบฐานข้อมูลเชิงพื้นที่ของถังดักไขมันและระบบบำบัดน้ำเสียในเขตเทศบาลเมืองป่าตอง (สำหรับกองช่างสุขาภิบาล) จัดทำขึ้นโดยการประยุกต์ใช้เทคโนโลยีสารสนเทศและเทคโนโลยีภูมิสารสนเทศเพื่อจัดทำฐานข้อมูลเชิงพื้นที่การติดตั้งถังดักไขมันและระบบบำบัดน้ำเสียของสถานประกอบการและที่อยู่อาศัย ในเขตพื้นที่เทศบาลเมืองป่าตอง เพื่อให้ได้ข้อมูลที่ถูกต้อง ครบถ้วน และสามารถนำไปใช้ประโยชน์ในการวางแผนบริหารจัดการน้ำเสียในพื้นที่ได้อย่างมีประสิทธิภาพ <button style="display: none;" onclick="toggleContent('p2')" id="toggleBtn" class="icon-btn">
+                <i id="toggleIcon" class="fa-solid fa-circle-chevron-down"></i>
+                </button></p>
+                <div id="p2" class="more-content" style="display: table;">
                 <p>
                     GIS Dashboard เครื่องมือสำคัญที่ใช้ในการ รวบรวมและแสดงภาพข้อมูลที่ถูกต้องและครบถ้วน เกี่ยวกับการติดตั้งและการใช้งาน ถังดักไขมัน (Grease Trap: GT) และ ระบบบำบัดน้ำเสีย (Wastewater Treatment System: TRT) ทั้งหมดในพื้นที่ เทศบาลเมืองป่าตอง ข้อมูลเหล่านี้ได้รับการจัดเก็บโดยคำนึงถึง ประเภทและขนาดของอาคารตามที่กฎหมายกำหนด เพื่อประโยชน์ในการตรวจสอบและบริหารจัดการ ผู้ใช้งานสามารถใช้ฟังก์ชัน ค้นหา, ตัวกรอง (Filter) และการสลับคุณสมบัติข้อมูล เพื่อสำรวจข้อมูลในระดับอาคาร และคลิกที่แถวของตารางข้อมูลหรือเครื่องหมาย (Marker) บนแผนที่เพื่อดูรายละเอียดเชิงลึกของแต่ละสถานที่
                 </p>
+                </div>
             </div>
 
             <!-- Summary Cards / ข้อมูลสรุปเชิงสถิติ -->

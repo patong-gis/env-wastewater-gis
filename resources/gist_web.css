@@ -469,6 +469,30 @@ table tbody tr:hover {
     margin-bottom: 10px;
 }
 
+.toggle-btn {
+        background: none;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 0;
+        text-decoration: underline;
+        margin-left: 5px;
+    }
+
+.more-content {
+    margin-top: 10px;
+    padding: 10px;
+    /*border-left: 3px solid #007bff;*/
+    background-color: #f9f9f9;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 /* Footer styles - สไตล์ของส่วนท้ายของหน้า - footer */
 .footer {
     background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1e88e5 100%);
