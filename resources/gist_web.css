@@ -45,7 +45,7 @@ body {
 /* Summary cards grid styles - สไตล์กริดของการ์ดสรุป */
 .summary-cards { 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     margin-bottom: 30px;
 }
@@ -483,9 +483,9 @@ table tbody tr:hover {
 .more-content {
     margin-top: 10px;
     padding: 10px;
-    /*border-left: 3px solid #007bff;*/
-    background-color: #f9f9f9;
-    animation: fadeIn 0.5s;
+    /*border-left: 3px solid #007bff;
+    background-color: #f9f9f9;*/
+    animation: fadeIn 0.45s;
 }
 
 @keyframes fadeIn {
