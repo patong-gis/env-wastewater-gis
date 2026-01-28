@@ -45,8 +45,8 @@ body {
 /* Summary cards grid styles - สไตล์กริดของการ์ดสรุป */
 .summary-cards { 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
     margin-bottom: 30px;
 }
 
@@ -54,7 +54,7 @@ body {
 .card {
     background: white;
     border-radius: 8px;
-    padding: 25px;
+    padding: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-left: 4px solid #1e88e5;
 }
@@ -109,7 +109,7 @@ body {
 .panel {
     background: white;
     border-radius: 8px;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
